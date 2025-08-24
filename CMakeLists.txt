@@ -29,6 +29,9 @@ CPMAddPackage(
     NAME stdexec
     GITHUB_REPOSITORY NVIDIA/stdexec
     GIT_TAG main # This will always pull the latest code from the `main` branch. You may also use a specific release version or tag
+    OPTIONS
+        "STDEXEC_BUILD_EXAMPLES OFF"
+        "STDEXEC_BUILD_TESTS OFF"
 )
 
 file(GLOB HEADER_FILES "${CMAKE_SOURCE_DIR}/include/*.hpp")
@@ -60,7 +63,13 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_imp)
 file(GLOB TEST_SRC_FILES "${CMAKE_SOURCE_DIR}/tests/*.cpp")
 
 add_executable(${PROJECT_NAME}_tests "${TEST_SRC_FILES}")
-target_link_libraries(${PROJECT_NAME}_tests PRIVATE ${PROJECT_NAME}_imp GTest::GTest GTest::Main STDEXEC::stdexec matplot)
+target_link_libraries(${PROJECT_NAME}_tests PRIVATE
+    ${PROJECT_NAME}_imp
+    GTest::GTest
+    GTest::Main
+    STDEXEC::stdexec
+    sfml-graphics sfml-window sfml-system)
+
 target_include_directories(${PROJECT_NAME}_tests PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${stdexec_SOURCE_DIR}/include

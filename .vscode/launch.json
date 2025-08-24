@@ -7,12 +7,23 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Launch MandelbrotFractal",
+            "name": "Launch Debug MandelbrotFractal",
             "program": "${workspaceFolder}/build/MandelbrotFractal",
             "args": [
             ],
             "cwd": "${workspaceFolder}/build",
             "preLaunchTask": "GCC: Build Debug app",
+            "initCommands": ["settings set target.disable-aslr false"]
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Launch Release MandelbrotFractal",
+            "program": "${workspaceFolder}/build/MandelbrotFractal",
+            "args": [
+            ],
+            "cwd": "${workspaceFolder}/build",
+            "preLaunchTask": "GCC: Build Release app",
             "initCommands": ["settings set target.disable-aslr false"]
         }
     ]
